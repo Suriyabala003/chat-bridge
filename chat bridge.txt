@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Application - Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .home-container {
+      width: 400px;
+      height: 450px;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+    .home-header {
+      background-color: #007bff;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      border-radius: 10px 10px 0 0;
+    }
+    .add-btn {
+      background-color: #007bff;
+      color: white;
+      font-size: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .home-image {
+      margin-top: 20px;
+      width: 80%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 10px;
+    }
+    .submenu {
+      display: none;
+      position: absolute;
+      bottom: 90px;
+      right: 20px;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 5px 0;
+    }
+    .submenu button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submenu button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="home-container">
+    <div class="home-header">
+      <h1>CHAT BRIDGE</h1>
+    </div>
+    <h3>Connect With Networks!</h3>
+   
+    <img src="https://biz.prlog.org/SLA-INSTITUTE/logo.jpg" alt="Chat Image" class="home-image">
+
+    <button class="add-btn" onclick="toggleMenu()">+</button>
+    <div class="submenu" id="submenu">
+      <button onclick="requestGlobalPassword()">Global Chat</button>
+      <button onclick="requestCommunityPassword()">Community Chat</button>
+    </div>
+  </div>
+  <script>
+    function toggleMenu() {
+      const submenu = document.getElementById('submenu');
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+    }
+   
+    window.addEventListener('click', function(event) {
+      const submenu = document.getElementById('submenu');
+      if (!event.target.matches('.add-btn') && !event.target.closest('.submenu')) {
+        submenu.style.display = 'none';
+      }
+    });
+
+    function requestGlobalPassword() {
+      const password = prompt("Enter Admin Key for Global Chat:");
+      if (password === "admin123") {
+        alert("Access Granted to Global Chat");
+        window.location.href = "Global.html";
+      } else if (password !== null) {
+        alert("Invalid Admin Key");
+      }
+    }
+
+    function requestCommunityPassword() {
+      const password = prompt("Enter Password for Community Chat:");
+      if (password === "admin456") {
+        alert("Access Granted to Community Chat");
+        window.location.href = "community.html";
+      } else if (password !== null) {
+        alert("Invalid Password");
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Chat</title>
+  <style>
+ 
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .chat-container {
+      width: 400px;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .chat-header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      position: relative;
+    }
+    .chat-window {
+      height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+    .user {
+      font-weight: bold;
+    }
+    .chat-footer {
+      display: flex;
+      border-top: 1px solid #ddd;
+      position: relative;
+    }
+    #message-input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    #send-btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      color: black;
+    }
+    #attach-btn{
+       border: none;
+      cursor: pointer;
+      padding: 10px;
+      color: black;
+    }
+    #community-btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      background-color: #007bff;
+      color: black;
+    }
+    #send-btn:hover, #attach-btn:hover, #community-btn:hover {
+      background-color: #0056b3;
+    }
+    #attach-options {
+      position: absolute;
+      bottom: 50px;
+      right: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    #attach-options button {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+    #attach-options button:hover {
+      background-color: #f2f2f2;
+    }
+    #attach-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+    #community-list {
+      display: none;
+      position: absolute;
+      background-color: #007bff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 100%;
+      top: 50px;
+      left: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <header class="chat-header">
+      <h2>Community Chat</h2>
+      <button id="community-btn">Communities</button>
+    </header>
+    <div id="community-list"></div>
+    <div class="chat-window" id="chat-window"></div>
+    <footer class="chat-footer">
+      <input type="text" id="message-input" placeholder="Type a message...">
+      <button id="send-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+          <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+        </svg>
+      </button>
+      <button id="attach-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16">
+          <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
+        </svg>
+      </button>
+      <div id="attach-options">
+        <button onclick="handleAttach('Document')">Attach Document</button>
+        <button onclick="handleAttach('Contacts')">Share Contact</button>
+        <button onclick="handleAttach('Location')">Share Location</button>
+      </div>
+      <input type="file" id="file-input" style="display: none;">
+    </footer>
+  </div>
+
+  <script>
+    const chatWindow = document.getElementById('chat-window');
+    const sendButton = document.getElementById('send-btn');
+    const messageInput = document.getElementById('message-input');
+    const attachButton = document.getElementById('attach-btn');
+    const attachOptions = document.getElementById('attach-options');
+    const fileInput = document.getElementById('file-input');
+    const communityBtn = document.getElementById('community-btn');
+    const communityList = document.getElementById('community-list');
+
+    let communities = { General: [] };
+    let currentCommunity = 'General';
+
+    function addMessage(username, message) {
+      if (!communities[currentCommunity]) communities[currentCommunity] = [];
+      communities[currentCommunity].push({ username, message });
+      renderMessages();
+    }
+
+    function renderMessages() {
+      chatWindow.innerHTML = '';
+      communities[currentCommunity].forEach(({ username, message }) => {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.innerHTML = `<span class="user">${username}:</span> ${message}`;
+        chatWindow.appendChild(messageElement);
+      });
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    sendButton.addEventListener('click', () => {
+      const message = messageInput.value.trim();
+      if (message) {
+        addMessage('You', message);
+        messageInput.value = '';
+      }
+    });
+
+    attachButton.addEventListener('click', () => {
+      attachOptions.style.display = attachOptions.style.display === 'block' ? 'none' : 'block';
+    });
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file) {
+        const fileURL = URL.createObjectURL(file);
+        addMessage('You', `Shared a file: <a href="${fileURL}" download="${file.name}">${file.name}</a>`);
+      }
+    });
+
+    function handleAttach(option) {
+      if (option === 'Document') {
+        fileInput.click();
+      } else if (option === 'Contacts') {
+        const contactName = prompt("Enter contact's name:");
+        const phoneNumber = prompt("Enter contact's phone number:");
+        if (contactName && phoneNumber) {
+          addMessage('You', `Shared contact: ${contactName} - <a href="tel:${phoneNumber}">${phoneNumber}</a>`);
+        }
+      } else if (option === 'Location') {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            position => {
+              const { latitude, longitude } = position.coords;
+              addMessage(
+                'You',
+                `Shared location: <a href="https://maps.google.com/?q=${latitude},${longitude}" target="_blank">View Location</a>`
+              );
+            },
+            () => addMessage('System', 'Failed to retrieve location.')
+          );
+        } else {
+          addMessage('System', 'Geolocation not supported.');
+        }
+      }
+      attachOptions.style.display = 'none';
+    }
+
+    communityBtn.addEventListener('click', () => {
+      communityList.style.display = communityList.style.display === 'block' ? 'none' : 'block';
+      renderCommunityList();
+    });
+
+    function renderCommunityList() {
+      communityList.innerHTML = `
+        <input type="text" id="new-community-input" placeholder="Add new community">
+        <button onclick="addCommunity()">Add Community</button>
+        ${Object.keys(communities)
+          .map(community => `<button onclick="switchCommunity('${community}')">${community}</button>`)
+          .join('')}
+      `;
+    }
+
+    function addCommunity() {
+      const newCommunityInput = document.getElementById('new-community-input');
+      const newCommunity = newCommunityInput.value.trim();
+      if (newCommunity && !communities[newCommunity]) {
+        communities[newCommunity] = [];
+        newCommunityInput.value = '';
+        switchCommunity(newCommunity);
+        renderCommunityList();
+      }
+    }
+
+    function switchCommunity(community) {
+      currentCommunity = community;
+      renderMessages();
+      communityList.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .chat-container {
+      width: 400px;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .chat-header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+    .chat-window {
+      height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+    .user {
+      font-weight: bold;
+    }
+    .chat-footer {
+      display: flex;
+      border-top: 1px solid #ddd;
+      position: relative;
+    }
+    #message-input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    #send-btn, #attach-btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      color: black;
+      background-color: #f0f0f0;
+    }
+    #send-btn:hover, #attach-btn:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+    #attach-options {
+      position: absolute;
+      bottom: 50px;
+      right: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    #attach-options button {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+    #attach-options button:hover {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <header class="chat-header">
+      <h2>Global Chat</h2>
+    </header>
+    <div class="chat-window" id="chat-window"></div>
+    <footer class="chat-footer">
+      <input type="text" id="message-input" placeholder="Type a message...">
+      <button id="send-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+        </svg>
+      </button>
+      <button id="attach-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
+        </svg>
+      </button>
+      <div id="attach-options">
+        <button onclick="handleAttach('Document')">Attach files</button>
+        <button onclick="handleAttach('Contacts')">Contact</button>
+        <button onclick="handleAttach('Location')">Location</button>
+      </div>
+      <input type="file" id="file-input" style="display: none;">
+    </footer>
+  </div>
+  <script>
+    const chatWindow = document.getElementById('chat-window');
+    const sendButton = document.getElementById('send-btn');
+    const messageInput = document.getElementById('message-input');
+    const attachButton = document.getElementById('attach-btn');
+    const attachOptions = document.getElementById('attach-options');
+    const fileInput = document.getElementById('file-input');
+
+    function addMessage(username, message) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+      messageElement.innerHTML = `<span class="user">${username}:</span> ${message}`;
+      chatWindow.appendChild(messageElement);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    sendButton.addEventListener('click', () => {
+      const message = messageInput.value.trim();
+      if (message) {
+        addMessage('You', message);
+        messageInput.value = '';
+      }
+    });
+
+    attachButton.addEventListener('click', () => {
+      attachOptions.style.display = attachOptions.style.display === 'block' ? 'none' : 'block';
+    });
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file) {
+        const fileURL = URL.createObjectURL(file);
+        addMessage('You', `Shared a file: <a href="${fileURL}" download="${file.name}">${file.name}</a>`);
+      }
+    });
+
+    function handleAttach(option) {
+      if (option === 'Document') {
+        fileInput.click();
+      } else if (option === 'Contacts') {
+        const contactName = prompt("Enter the contact's name:");
+        const phoneNumber = prompt("Enter the contact's phone number:");
+        if (contactName && phoneNumber) {
+          addMessage('You', `Shared contact: ${contactName} - <a href="tel:${phoneNumber}">${phoneNumber}</a>`);
+        }
+      } else if (option === 'Location') {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              const mapLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+              addMessage('You', `Shared location: <a href="${mapLink}" target="_blank">View Location</a>`);
+            },
+            () => {
+              alert("Unable to retrieve location.");
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by your browser.");
+        }
+      }
+      attachOptions.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
